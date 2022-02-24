@@ -1,0 +1,87 @@
+/* 공통 및 일반적인 스타일 설정은 여기에 */
+html {
+  overflow: hidden;
+
+  /* scrollbar */
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: rgba(136, 136, 136, 0.3);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(83, 83, 83, 0.4);
+    border-radius: 3px;
+  }
+}
+
+/* 메인 레이아웃 기본 스타일 설정 */
+.u-main-frame {
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  max-width: calc(100vw);
+  max-height: calc(100vh - 64px);
+  min-width: 1020px;
+  min-height: 200px;
+  background-color: rgb(235, 235, 235);
+  overflow-y: auto;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  .u-col {
+    padding: 4px;
+  }
+
+  .u-page-view {
+    background-color: rgb(255, 255, 255);
+    border: rgba(172, 172, 172, 0.5) 1px solid;
+    border-radius: 3px;
+  }
+
+  // 상위 레이어
+  .u-top-layer {
+    height: calc(100% - 5px);
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    min-height: 400px;
+
+    .u-col {
+      height: 100%;
+      margin: 0;
+      // .u-page-view {
+      //   background-color: rgb(255, 228, 228);
+      // }
+
+      // &:last-child {
+      //   .u-page-view {
+      //     background-color: rgb(239, 241, 255);
+      //   }
+      // }
+    }
+  }
+}
+
+/* 레이아웃 하위 내부 뷰에 대한 스타일 설정  */
+.u-page-view {
+  height: 100%;
+}
+
+.u-data-box {
+  height: calc(100% - 40px);
+  overflow: hidden;
+  overflow-y: visible;
+
+  & > div {
+    padding: 0;
+  }
+}

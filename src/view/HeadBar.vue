@@ -19,8 +19,8 @@
     <v-spacer></v-spacer>
 
     <div>
-      <v-btn text @click="(event) => load(event)">
-        <v-icon>{{ icon.load }}</v-icon>
+      <v-btn text @click="(event) => open(event)">
+        <v-icon>{{ icon.open_fold }}</v-icon>
       </v-btn>
       <v-btn text @click="(event) => save(event)">
         <v-icon>{{ icon.save }}</v-icon>
@@ -55,14 +55,24 @@ export default {
       const path = global.$file.saveFile(this.root, global.$store.toData());
       this.$store.commit("alertInfo", `${path} ${global.$lang.alert.save_ok}`);
     },
-    load() {
+    open() {
       // 파일로 저장된 프로젝트 데이터를 불러오자.
-      const data = global.$file.loadFile(this.root);
-      global.$store.fromData(data);
+      const file = global.$file.openTxtFile();
+      const text = file && global.$file.readFile(file);
+      // console.dir(text)
+      global.$store.fromData(text);
 
       this.$store.commit("reload");
       // console.dir(global.$store.toData());
     },
+    // load() {
+    //   // 파일로 저장된 프로젝트 데이터를 불러오자.
+    //   const data = global.$file.loadFile(this.root);
+    //   global.$store.fromData(data);
+
+    //   this.$store.commit("reload");
+    //   // console.dir(global.$store.toData());
+    // },
   },
 };
 </script>

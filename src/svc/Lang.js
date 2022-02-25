@@ -7,6 +7,12 @@ const ko = {
   teacher: '선생님',
   age: '나이',
   score: '점수',
+  // 번호   이름   나이  국어   영어  수학   사회  과학  총점     평균
+  kor: '국어',
+  eng: '영어',
+  math: '수학',
+  society: '사회',
+  science: '과학',
   total: '총점',
   average: '평균',
   classname: '학과명',

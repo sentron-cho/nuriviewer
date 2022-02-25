@@ -31,81 +31,15 @@ const File = {
     const files = showDialogFiles(filters)
     return files && files[0] ? files[0] : null
   },
-  openXmlFile: (filters = [{ name: 'XML', extensions: ['xml'] }]) => {
+  openTxtFile: (filters = [{ name: 'TXT', extensions: ['txt'] }]) => {
     const files = showDialogFiles(filters)
     return files && files[0] ? files[0] : null
-  },
-  openXlsFile: (filters = [{ name: 'EXCEL', extensions: ['xlsx', 'xls'] }]) => {
-    const files = showDialogFiles(filters)
-    return files && files[0] ? files[0] : null
-  },
-  readXlsFile: (file) => {
-    if (!file) return null
-
-    let object = {
-      protocol: '',
-      deviceId: '',
-      deviceDataID: '',
-      version: '',
-      dataCreated: '',
-      dataSet: [],
-      componentDataSet: [],
-    }
-
-    const parseCommonInfo = (rowObj, fileName) => {
-      const data = {}
-      data.protocol = Object.keys(rowObj[0])[1]
-      data.deviceId = rowObj[0][Object.keys(rowObj[0])[1]]
-      data.deviceDataID = fileName
-      data.version = rowObj[1][Object.keys(rowObj[0])[1]]
-      return data
-    }
-
-    var wb = XLSX.readFile(file)
-
-    if (!wb || !wb.SheetNames || wb.SheetNames.length < 1) {
-      console.warn('xls file sheet error!')
-      // global.$store.commit('alertWarn', global.$lang.alert.file_error_equip)
-      return null
-    }
-
-    var arrays = []
-    wb.SheetNames.forEach((sheetName, idx) => {
-      var rowObj = XLSX.utils.sheet_to_json(wb.Sheets[sheetName])
-      if (!rowObj || rowObj.length < 1) {
-        object = null
-        console.warn('xls file sheet or data error!')
-        // global.$store.commit('alertWarn', global.$lang.alert.file_error_equip)
-        return
-      }
-
-      // 첫번째 시트에서 정보 가져오기
-      if (idx === 0) {
-        object = { ...object, ...parseCommonInfo(rowObj, file) }
-        return
-      }
-
-      rowObj.map((item) => {
-        if (object.protocol !== 'NMEA') {
-          item.ComponentDataID = sheetName
-        } else {
-          item['Talker'] = item['Talker/Sentence (Component ID)']
-          item['Sentence'] = item['__EMPTY']
-        }
-        return item
-      })
-      arrays = arrays.concat(rowObj)
-    })
-    console.dir(arrays)
-
-    object && (object.dataSet = arrays)
-    return object
   },
   readFile: (file) => {
     if (!file) return null
 
     // xml -> json으로 파싱
-    const text = fs.readFileSync(file).toString()
+    const text = fs.readFileSync(file, { encoding: 'utf-8' }).toString()
     if (!text) return null
 
     return text

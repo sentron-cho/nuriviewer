@@ -2,14 +2,13 @@
   <v-container fluid>
     <v-data-table
       dense
-      v-model="selected"
       :headers="headers"
       :items="items"
       hide-default-footer
       disable-pagination
       class="elevation-1 u-table"
       item-key="Key"
-      single-select
+      disable-sort
     >
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon @click="remove(item)"> mdi-delete </v-icon>
@@ -37,13 +36,10 @@ export default {
   created() {},
   watch: {
     event(eid) {
-      if (eid === "refresh") {
-        this.initial();
-      } else if (eid === "reload") {
-        this.initial();
-      }
+      // if (eid === "refresh") {
+      // } else if (eid === "reload") {
+      // }
     },
-    data(value) {},
   },
   methods: {
     initial() {

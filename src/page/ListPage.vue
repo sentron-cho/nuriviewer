@@ -9,6 +9,7 @@
       class="elevation-1 u-table"
       item-key="Key"
       disable-sort
+      @click:row="select"
     >
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon @click="remove(item)"> mdi-delete </v-icon>
@@ -28,7 +29,12 @@ export default {
   },
   data: () => ({
     headers: [
-      { text: "학과명", value: "classid", width: "100%" },
+      {
+        text: global.$lang.classname,
+        value: "name",
+        width: "100%",
+        align: "center",
+      },
     ],
     selected: [],
     items: [],
@@ -36,6 +42,12 @@ export default {
   created() {},
   watch: {
     event(eid) {
+      if(eid === 'clear') {
+        this.items = [];
+        return;
+      }
+
+      this.initial();
       // if (eid === "refresh") {
       // } else if (eid === "reload") {
       // }
@@ -44,16 +56,10 @@ export default {
   methods: {
     initial() {
       if (!this.data || !this.data.items) return;
-
       this.items = _.cloneDeep(this.data.items);
-      // this.items = this.items.map((item) => {
-      //   item["Key"] = `${item["Node ID"]}`;
-      //   item["disabled"] = false;
-      //   return item;
-      // });
     },
-    remove(item) {
-      this.$emit("remove", item);
+    select(v) {
+      this.$emit("select", v);
     },
   },
 };

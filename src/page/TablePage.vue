@@ -38,15 +38,15 @@ export default {
         align: "center",
       },
       { text: global.$lang.no, value: "no", width: "60px", align: "center" },
-      { text: global.$lang.name, value: "name", width: "260px" },
-      { text: global.$lang.age, value: "age" },
-      { text: global.$lang.kor, value: "kor" },
-      { text: global.$lang.eng, value: "eng" },
-      { text: global.$lang.math, value: "math" },
-      { text: global.$lang.society, value: "society" },
-      { text: global.$lang.science, value: "science" },
-      { text: global.$lang.total, value: "total" },
-      { text: global.$lang.average, value: "average" },
+      { text: global.$lang.name, value: "name", width: "260px", align: "center" },
+      { text: global.$lang.age, value: "age", align: "right" },
+      { text: global.$lang.kor, value: "kor", align: "right" },
+      { text: global.$lang.eng, value: "eng", align: "right" },
+      { text: global.$lang.math, value: "math", align: "right" },
+      { text: global.$lang.society, value: "society", align: "right" },
+      { text: global.$lang.science, value: "science", align: "right" },
+      { text: global.$lang.total, value: "total", align: "right" },
+      { text: global.$lang.average, value: "average", align: "right" },
     ],
     selected: [],
     items: [],
@@ -54,11 +54,12 @@ export default {
   created() {},
   watch: {
     event(eid) {
-      if (eid === "refresh") {
-        this.initial();
-      } else if (eid === "reload") {
-        this.initial();
+      if (eid === "clear") {
+        this.items = [];
+        return;
       }
+
+      this.initial();
     },
     data(value) {},
   },
@@ -67,6 +68,7 @@ export default {
       if (!this.data || !this.data.items) return;
 
       this.items = _.cloneDeep(this.data.items);
+      console.dir(this.items);
       // this.items = this.items.map((item) => {
       //   item["Key"] = `${item["Node ID"]}`;
       //   item["disabled"] = false;

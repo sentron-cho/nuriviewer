@@ -9,16 +9,6 @@
           <DataView class="u-page-view" :event="event" @select="select" />
         </v-col>
       </v-row>
-      <v-row class="u-bottom-layer">
-        <v-col cols="12" class="u-col">
-          <MappingView
-            class="u-page-view"
-            :event="event"
-            @sizing="sizing"
-            @remove="remove"
-          />
-        </v-col>
-      </v-row>
     </v-container>
   </v-main>
 </template>
@@ -134,8 +124,9 @@ export default {
   thead tr th {
     background-color: #e6e6e6;
     border-color: #bdbdbd;
-    min-width: 160px;
+    min-width: 80px;
     border-right: rgb(200, 200, 200) 1px solid;
+    text-align: center !important;
   }
 
   tbody tr {

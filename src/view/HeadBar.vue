@@ -12,9 +12,9 @@
     </div>
 
     <v-spacer></v-spacer>
-    <div>
+    <!-- <div>
       <v-subheader>{{ `Project Folder : ${root} ` }}</v-subheader>
-    </div>
+    </div> -->
 
     <v-spacer></v-spacer>
 
@@ -22,15 +22,15 @@
       <v-btn text @click="(event) => open(event)">
         <v-icon>{{ icon.open_fold }}</v-icon>
       </v-btn>
-      <v-btn text @click="(event) => save(event)">
+      <!-- <v-btn text @click="(event) => save(event)">
         <v-icon>{{ icon.save }}</v-icon>
-      </v-btn>
+      </v-btn> -->
       <v-btn text @click="(event) => clear(event)">
         <v-icon>{{ icon.refresh }}</v-icon>
       </v-btn>
-      <v-btn text>
+      <!-- <v-btn text>
         <v-icon>{{ icon.logout }}</v-icon>
-      </v-btn>
+      </v-btn> -->
     </div>
   </v-app-bar>
 </template>

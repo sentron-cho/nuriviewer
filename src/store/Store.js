@@ -6,15 +6,15 @@ const Store = () => {
       MainFrame과 바로 자식 노드 view 에서만 
       접근하는 것으로 규칙을 정하자.
     */
-  var shipid = ''
+  var selection = ''
   var model = null
 
   return {
-    getShipid: () => {
-      return shipid
+    getSelection: () => {
+      return selection
     },
-    setShipid: (value) => {
-      shipid = value
+    setSelection: (value) => {
+      selection = value
     },
     getModel: () => {
       return model
@@ -26,7 +26,7 @@ const Store = () => {
       model = null
     },
     toData: () => {
-      return { shipid, model }
+      return { selection, model }
     },
     fromData: (data) => {
       // ==========================================================
@@ -67,13 +67,14 @@ const Store = () => {
 
       list.forEach((item, index) => {
         if (item.indexOf('선생님') > 0) {
+          let name = classname
           classname = item.substr(0, item.indexOf('선생님') - 1)
           if (index <= 0) return
 
-          items.push(arrs)
+          items.push({ name: name, items: arrs })
           arrs = []
         } else {
-          arrs.push(classname + item)
+          arrs.push(classname + (item.substr(0, 1) === '#' ? item : '#' + item))
         }
       })
 
